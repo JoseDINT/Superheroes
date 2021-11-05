@@ -5,15 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Superheroes"
         mc:Ignorable="d"
-        Title="Superheroes" Height="450" Width="800" Icon="assets/shield.ico">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Background="Beige">
+        Title="Superheroes" MinHeight="450" MinWidth="800" Icon="assets/shield.ico">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="NombrePersonajeStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="DockPanel.Dock" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Image}" x:Key="FlechaEstilo">
+            <Setter Property="Width" Value="30"/>
+        </Style>
+
+        <Style TargetType="{x:Type Image}" x:Key="FlechaRestarEstilo" BasedOn="{StaticResource FlechaEstilo}">
+            <EventSetter Event="MouseLeftButtonUp" Handler="AtrasImagen_MouseLeftButtonUp"/>
+        </Style>
+
+        <Style TargetType="{x:Type Image}" x:Key="FlechaSumarEstilo" BasedOn="{StaticResource FlechaEstilo}">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="MouseLeftButtonUp" Handler="AdelanteImagen_MouseLeftButtonUp"/>
+        </Style>
+
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        
+    </Window.Resources>
+    
+    
+    <DockPanel LastChildFill="False" Background="{Binding Path=Value}" DataContext="{StaticResource fondo}" x:Name="Principal">
+        <DockPanel x:Name="PanelSuperiorStackPanel" DockPanel.Dock="Top" LastChildFill="False" Margin="10">
+
+            <TextBlock Style="{StaticResource NombrePersonajeStyle}" Text="{Binding Path=Text}" >Nombre Personaje</TextBlock>
+            <Image DockPanel.Dock="Right" Source="assets/avengers.png" Width="40" ></Image>
+            <Image DockPanel.Dock="Right" Source="assets/xmen.png" Width="60" ></Image>
             
-        </StackPanel>
-        <Image Source="" >
+        </DockPanel>
+
+        <Image x:Name="PersonajeImage" Margin="10"/>
+
+        <StackPanel x:Name="PanelFlechaStackPanel" >
             
-        </Image>
-        <StackPanel DockPanel.Dock="Bottom" Background="Blue">
+            <Image Source="assets/arrow.png" Style="{StaticResource FlechaRestarEstilo}"/>
+            <TextBlock x:Name="PosicionTextBlock" FontWeight="Bold" FontSize="20" Tag="1">1</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="20">/</TextBlock>
+            <TextBlock x:Name="LimiteMáximoTextBlock" FontWeight="Bold" FontSize="20">3</TextBlock>
+            <Image Source="assets/arrow.png" Style="{StaticResource FlechaSumarEstilo}"/>
             
         </StackPanel>
     </DockPanel>

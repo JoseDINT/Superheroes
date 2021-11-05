@@ -23,6 +23,34 @@ namespace Superheroes
         public MainWindow()
         {
             InitializeComponent();
+
+
+
+
+
+
+        }
+
+        private void AdelanteImagen_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            int contador = int.Parse(PosicionTextBlock.Text);
+            int limiteMax = int.Parse(LimiteMáximoTextBlock.Text);
+            if (contador < limiteMax)
+            {
+                contador++;
+                PosicionTextBlock.Text = contador.ToString();
+            }
+        }
+
+        private void AtrasImagen_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            int contador = int.Parse(PosicionTextBlock.Text);
+            if (contador > 1)
+            {
+                contador--;
+                PosicionTextBlock.Text = contador.ToString();
+            }
+
         }
     }
 }
